@@ -24,7 +24,7 @@ public class Hud {
 
 	public Hud(SpriteBatch sb) {
 		energy = 100;
-		viewport = new FitViewport(SuperMetroid.V_WIDTH, SuperMetroid.V_HEIGHT, new OrthographicCamera());
+		viewport = new FitViewport(SuperMetroid.VIRTUAL_WIDTH, SuperMetroid.VIRTUAL_HEIGHT, new OrthographicCamera());
 		stage = new Stage(viewport, sb);
 
 		Table table = new Table();

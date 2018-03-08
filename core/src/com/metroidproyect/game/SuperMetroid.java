@@ -9,8 +9,8 @@ public class SuperMetroid extends Game {
 	// Public para poder acceder desde los otros niveles, solo utilizaremos un
 	// batch
 	public SpriteBatch batch;
-	public static final int V_WIDTH = 400;
-	public static final int V_HEIGHT = 206;
+	public static final int VIRTUAL_WIDTH = 400;
+	public static final int VIRTUAL_HEIGHT = 206;
 	
 	@Override
 	public void create() {

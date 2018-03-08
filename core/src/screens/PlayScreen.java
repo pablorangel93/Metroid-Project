@@ -18,7 +18,7 @@ import hud.Hud;
 public class PlayScreen implements Screen {
 	private Hud hud;
 	private SuperMetroid game;
-	Texture texture;
+	// Texture texture;
 	private OrthographicCamera camera;
 	private Viewport myViewPort;
 
@@ -30,7 +30,7 @@ public class PlayScreen implements Screen {
 		this.game = game;
 		// texture = new Texture("badlogic.jpg");
 		camera = new OrthographicCamera();
-		myViewPort = new FitViewport(SuperMetroid.V_WIDTH, SuperMetroid.V_HEIGHT, camera);
+		myViewPort = new FitViewport(SuperMetroid.VIRTUAL_WIDTH, SuperMetroid.VIRTUAL_HEIGHT, camera);
 		hud = new Hud(game.batch);
 
 		mapLoader = new TmxMapLoader();
@@ -41,22 +41,21 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
 
 	}
 
-	public void handleInput(float dt) {
+	public void handleInput(float delta) {
 		if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) {
-			camera.position.x += 100 * dt;
+			camera.position.x += 100 * delta;
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) {
-			camera.position.x -= 100 * dt;
+			camera.position.x -= 100 * delta;
 		}
 	}
 
-	private void update(float dt) {
-		this.handleInput(dt);
+	private void update(float delta) {
+		this.handleInput(delta);
 		camera.update();
 		renderer.setView(camera);
 	}
