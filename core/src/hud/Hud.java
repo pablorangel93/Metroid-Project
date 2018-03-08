@@ -16,9 +16,9 @@ import com.metroidproyect.game.SuperMetroid;
 public class Hud {
 	public Stage stage;
 	private Viewport viewport;
-
+	
 	private Integer energy;
-
+	
 	Label samusEnergy;
 	Label energyText;
 
