@@ -1,8 +1,6 @@
 package objetosMapas;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.math.Rectangle;
 import screens.PlayScreen;
 
 
