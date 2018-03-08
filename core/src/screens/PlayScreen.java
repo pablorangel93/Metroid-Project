@@ -28,13 +28,12 @@ public class PlayScreen implements Screen {
 
 	public PlayScreen(SuperMetroid game) {
 		this.game = game;
-		// texture = new Texture("badlogic.jpg");
 		camera = new OrthographicCamera();
 		myViewPort = new FitViewport(SuperMetroid.V_WIDTH, SuperMetroid.V_HEIGHT, camera);
 		hud = new Hud(game.batch);
 
 		mapLoader = new TmxMapLoader();
-		map = mapLoader.load("mapa.tmx");
+		map = mapLoader.load("mapa/mapa.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map);
 		camera.position.set(myViewPort.getWorldWidth() / 2, myViewPort.getWorldHeight() / 2, 0);
 	}
@@ -47,11 +46,11 @@ public class PlayScreen implements Screen {
 
 	public void handleInput(float dt) {
 		if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) {
-			camera.position.x += 100 * dt;
+			camera.position.x -= 100 * dt;
 		}
 
 		if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) {
-			camera.position.x -= 100 * dt;
+			camera.position.x += 100 * dt;
 		}
 	}
 
