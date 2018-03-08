@@ -18,12 +18,15 @@ public class Samus extends Sprite {
 	}
 
 	public void defineSamus() {
+
 		BodyDef bdef = new BodyDef();
+		// Define la posición del personaje
 		bdef.position.set(42 / SuperMetroid.PPM, 42 / SuperMetroid.PPM);
 		bdef.type = BodyDef.BodyType.DynamicBody;
 		b2body = world.createBody(bdef);
 		FixtureDef fdef = new FixtureDef();
 		CircleShape shape = new CircleShape();
+		// Define el tamaño del personaje
 		shape.setRadius(16 / SuperMetroid.PPM);
 
 		fdef.shape = shape;

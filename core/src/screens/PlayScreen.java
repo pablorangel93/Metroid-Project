@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.metroidproyect.game.SuperMetroid;
 
 import Personaje.Samus;
+import Util.B2WorldCreator;
 import hud.Hud;
 
 public class PlayScreen implements Screen {
@@ -61,40 +62,7 @@ public class PlayScreen implements Screen {
 		player = new Samus(world);
 		b2dr = new Box2DDebugRenderer();
 
-		BodyDef bdef = new BodyDef();
-		PolygonShape shape = new PolygonShape();
-		FixtureDef fdef = new FixtureDef();
-		Body body;
-
-		// Ground
-
-		for (MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth() / 2) / SuperMetroid.PPM,
-					(rect.getY() + rect.getHeight() / 2) / SuperMetroid.PPM);
-			body = world.createBody(bdef);
-
-			shape.setAsBox(rect.getWidth() / 2 / SuperMetroid.PPM, rect.getHeight() / 2 / SuperMetroid.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
-
-		// Spikes
-
-		for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
-			Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-			bdef.type = BodyDef.BodyType.StaticBody;
-			bdef.position.set((rect.getX() + rect.getWidth() / 2) / SuperMetroid.PPM,
-					rect.getY() + rect.getHeight() / 2);
-			body = world.createBody(bdef);
-
-			shape.setAsBox(rect.getWidth() / 2 / SuperMetroid.PPM, rect.getHeight() / 2 / SuperMetroid.PPM);
-			fdef.shape = shape;
-			body.createFixture(fdef);
-		}
+		new B2WorldCreator(world, map);
 
 		// MUSICA
 
@@ -174,8 +142,11 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		map.dispose();
+		renderer.dispose();
+		world.dispose();
+		b2dr.dispose();
+		hud.dispose();
 	}
 
 }
