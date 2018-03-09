@@ -14,19 +14,18 @@ public class SuperMetroid extends Game {
 	public static final int VIRTUAL_WIDTH = 400;
 	public static final int VIRTUAL_HEIGHT = 206;
 	public static final float PPM = 100;
-	
+
 	public static AssetManager manager;
-	
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		
-//		manager = new AssetManager();
-//		manager.load("assets/musica/fondoDos.mp3", Music.class);
-//		
-//		manager.finishLoading();
-		
-			
+
+		// manager = new AssetManager();
+		// manager.load("assets/musica/fondoDos.mp3", Music.class);
+		//
+		// manager.finishLoading();
+
 		// SetScreen carga el nivel que le pasemos, en este caso PlayScreen y le
 		// pasamos el juego en sí (supermetroid)
 		setScreen(new PlayScreen(this));

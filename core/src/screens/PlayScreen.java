@@ -58,7 +58,7 @@ public class PlayScreen implements Screen {
 		renderer = new OrthogonalTiledMapRenderer(map, 1 / SuperMetroid.PPM);
 		camera.position.set(myViewPort.getWorldWidth() / 2, myViewPort.getWorldHeight() / 2, 0);
 
-		world = new World(new Vector2(0, -10), true);
+		world = new World(new Vector2(0, -20), true);
 		player = new Samus(world);
 		b2dr = new Box2DDebugRenderer();
 
@@ -78,7 +78,7 @@ public class PlayScreen implements Screen {
 	}
 
 	public void handleInput(float delta) {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.b2body.getPosition().y <= 0.7) {
 			player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2) {
@@ -86,6 +86,7 @@ public class PlayScreen implements Screen {
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2) {
 			player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+			
 		}
 		
 	}

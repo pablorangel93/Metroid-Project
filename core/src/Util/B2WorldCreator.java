@@ -15,7 +15,7 @@ import com.metroidproyect.game.SuperMetroid;
 public class B2WorldCreator {
 
 	public B2WorldCreator(World world, TiledMap map) {
-		
+
 		BodyDef bdef = new BodyDef();
 		PolygonShape shape = new PolygonShape();
 		FixtureDef fdef = new FixtureDef();
@@ -32,7 +32,7 @@ public class B2WorldCreator {
 			FixtureDef fdef) {
 
 		for (MapObject object : map.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
-			
+
 			Rectangle rect = ((RectangleMapObject) object).getRectangle();
 			bdef.type = BodyDef.BodyType.StaticBody;
 			bdef.position.set((rect.getX() + rect.getWidth() / 2) / SuperMetroid.PPM,
