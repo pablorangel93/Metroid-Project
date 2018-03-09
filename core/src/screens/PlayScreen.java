@@ -2,23 +2,14 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -40,7 +31,7 @@ public class PlayScreen implements Screen {
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 
-	private Music music;
+	//private Music music;
 
 	// Box2D Variables
 	World world;
@@ -51,7 +42,7 @@ public class PlayScreen implements Screen {
 		camera = new OrthographicCamera();
 		myViewPort = new FitViewport(SuperMetroid.VIRTUAL_WIDTH / SuperMetroid.PPM,
 				SuperMetroid.VIRTUAL_HEIGHT / SuperMetroid.PPM, camera);
-		hud = new Hud(game.batch);
+		hud = new Hud(game.getBatch());
 
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("mapa/mapabueno.tmx");
@@ -59,7 +50,7 @@ public class PlayScreen implements Screen {
 		camera.position.set(myViewPort.getWorldWidth() / 2, myViewPort.getWorldHeight() / 2, 0);
 
 		world = new World(new Vector2(0, -20), true);
-		player = new Samus(world);
+		player = new Samus(world,game.getBatch());
 		b2dr = new Box2DDebugRenderer();
 
 		new B2WorldCreator(world, map);
@@ -77,26 +68,15 @@ public class PlayScreen implements Screen {
 
 	}
 
-	public void handleInput(float delta) {
-		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && player.b2body.getPosition().y <= 0.7) {
-			player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.D) && player.b2body.getLinearVelocity().x <= 2) {
-			player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.A) && player.b2body.getLinearVelocity().x >= -2) {
-			player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
-			
-		}
-		
-	}
+
 
 	private void update(float delta) {
-		this.handleInput(delta);
+	//	this.handleInput(delta);
 		world.step(1 / 60f, 6, 2);
 		camera.position.x = player.b2body.getPosition().x;
 		camera.update();
 		renderer.setView(camera);
+		player.act(delta);
 	}
 
 	@Override
@@ -109,11 +89,9 @@ public class PlayScreen implements Screen {
 
 		b2dr.render(world, camera.combined);
 
-		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+		game.getBatch().setProjectionMatrix(hud.stage.getCamera().combined);
 		hud.stage.draw();
-		// game.batch.begin();
-		// game.batch.draw(texture, 0, 0);
-		// game.batch.end();
+		player.draw(game.getBatch(), 1);
 
 	}
 

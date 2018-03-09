@@ -2,7 +2,6 @@ package com.metroidproyect.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import screens.PlayScreen;
@@ -10,7 +9,7 @@ import screens.PlayScreen;
 public class SuperMetroid extends Game {
 	// Public para poder acceder desde los otros niveles, solo utilizaremos un
 	// batch
-	public SpriteBatch batch;
+	private SpriteBatch batch;
 	public static final int VIRTUAL_WIDTH = 400;
 	public static final int VIRTUAL_HEIGHT = 206;
 	public static final float PPM = 100;
@@ -38,4 +37,16 @@ public class SuperMetroid extends Game {
 		super.render();
 	}
 
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+	
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		super.dispose();
+	}
+
+	
+	
 }
