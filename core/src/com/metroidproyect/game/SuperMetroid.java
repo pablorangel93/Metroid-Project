@@ -13,6 +13,7 @@ public class SuperMetroid extends Game {
 	public SpriteBatch batch;
 	public static final int VIRTUAL_WIDTH = 400;
 	public static final int VIRTUAL_HEIGHT = 206;
+	public static final float PPM = 100;
 	
 	public static AssetManager manager;
 	
@@ -25,6 +26,7 @@ public class SuperMetroid extends Game {
 //		
 //		manager.finishLoading();
 		
+			
 		// SetScreen carga el nivel que le pasemos, en este caso PlayScreen y le
 		// pasamos el juego en sí (supermetroid)
 		setScreen(new PlayScreen(this));
