@@ -1,7 +1,7 @@
 package interfaces;
 
-import actores.PersonajePrincipal;
+import Personaje.Samus;
 
 public interface Colisionable {
-	public void colisionar(PersonajePrincipal jugador);
+	public void colisionar(Samus jugador);
 }
